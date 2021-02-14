@@ -1,0 +1,40 @@
+const winston = require('winston');
+const { combine, printf } = winston.format;
+
+const myFormat = printf(({ message }) => {
+    return `${message}`;
+});
+//https://www.npmjs.com/package/winston#formats
+const logger = winston.createLogger({
+    level: 'info',
+    format: combine(
+        myFormat
+    ),
+    //defaultMeta: "utf-8",
+    transports: [
+        //
+        // - Write to all logs with level `info` and below to `combined.log`
+        // - Write all logs error (and below) to `error.log`.
+        //
+        new winston.transports.File({
+            filename: 'jilu/xiaoxi.csv',
+            maxsize: 10485760
+        })
+    ]
+});
+
+//
+// If we're not in production then log to the `console` with the format:
+// `${info.level}: ${info.message} JSON.stringify({ ...rest }) `
+//
+logger.add(
+    new winston.transports.Console({
+        format: winston.format.combine(
+            winston.format.colorize(),
+            winston.format.simple()
+        ),
+        silent: process.env.NODE_ENV === 'test'
+    })
+);
+
+module.exports = logger;
