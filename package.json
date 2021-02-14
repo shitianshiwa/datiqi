@@ -1,0 +1,14 @@
+{
+  "name": "datiqi",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cqhttp": "^1.2.0",
+    "dayjs": "^1.8.19",
+    "decimal.js": "^10.2.0",
+    "log4js": "^6.3.0",
+    "winston": "^3.2.1"
+  }
+}
